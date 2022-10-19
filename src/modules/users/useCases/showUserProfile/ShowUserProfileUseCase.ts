@@ -1,3 +1,4 @@
+import { AppError } from "../../../../AppError";
 import { User } from "../../model/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
@@ -12,7 +13,7 @@ class ShowUserProfileUseCase {
     const user = this.usersRepository.findById(user_id);
 
     if (!user) {
-      throw new Error("Usuário não existe");
+      throw new AppError("Usuário não existe");
     }
 
     return user;

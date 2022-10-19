@@ -1,3 +1,4 @@
+import { AppError } from "../../../../AppError";
 import { User } from "../../model/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
@@ -13,7 +14,7 @@ class CreateUserUseCase {
     const userExists = this.usersRepository.findByEmail(email);
 
     if (userExists) {
-      throw Error("Email já usado");
+      throw new AppError("Email já usado");
     }
 
     const user = this.usersRepository.create({ email, name });

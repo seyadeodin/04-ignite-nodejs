@@ -1,3 +1,4 @@
+import { AppError } from "../../../../AppError";
 import { User } from "../../model/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
@@ -12,7 +13,7 @@ class ListAllUsersUseCase {
     const userExists = this.usersRepository.findById(user_id);
 
     if (!userExists.admin || !userExists) {
-      throw new Error("Apenas admins podem ver lista de usuários");
+      throw new AppError("Apenas admins podem ver lista de usuários");
     }
 
     const users = this.usersRepository.list();
