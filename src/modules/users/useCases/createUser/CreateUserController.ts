@@ -6,7 +6,15 @@ class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   handle(request: Request, response: Response): Response {
-    // Complete aqui
+    const { name, email } = request.body;
+
+    const user = this.createUserUseCase.execute({ name, email });
+
+    if (!user) {
+      return response.status(400).json({ error: "Email já existente" });
+    }
+
+    return response.status(201).json(user);
   }
 }
 

@@ -9,7 +9,15 @@ class ListAllUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ user_id }: IRequest): User[] {
-    // Complete aqui
+    const userExists = this.usersRepository.findById(user_id);
+
+    if (!userExists.admin || !userExists) {
+      throw new Error("Apenas admins podem ver lista de usuários");
+    }
+
+    const users = this.usersRepository.list();
+
+    return users;
   }
 }
 
